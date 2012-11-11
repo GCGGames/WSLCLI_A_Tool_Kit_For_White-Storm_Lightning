@@ -227,9 +227,9 @@ void WriteBool( stringstream *writeTo, bool value )
         *writeTo << "false\n";
 }
 
-void WriteScript( stringstream *writeTo, string script ) {
+void WriteScript( stringstream *writeTo, string script, string lineEnding ) {
     *writeTo << SCRIPT_LINE << "\n";
-    *writeTo << script << "\n";
+    *writeTo << script << lineEnding;
 }
 
 void WriteEntityToFile( Entity *toWrite )
@@ -242,14 +242,14 @@ void WriteEntityToFile( Entity *toWrite )
     WriteBool( &entity, toWrite->ref );
     WriteBool( &entity, toWrite->des );
     WriteBool( &entity, toWrite->desOnCreate );
-    WriteScript( &entity, toWrite->initScript );
-    WriteScript( &entity, toWrite->refScript );
-    WriteScript( &entity, toWrite->desScript );
-    WriteScript( &entity, "NULL" );
+    WriteScript( &entity, toWrite->initScript, "\n" );
+    WriteScript( &entity, toWrite->refScript, "\n" );
+    WriteScript( &entity, toWrite->desScript, "\n" );
+    WriteScript( &entity, "NULL", "\n" );
     if( toWrite->compID == 0 )
-        WriteScript( &entity, "NULL" );
+        WriteScript( &entity, "NULL", "" );
     else
-        WriteScript( &entity, toWrite->physScript );
+        WriteScript( &entity, toWrite->physScript, "" );
     fileDirectory << obj << toWrite->name << "/";
     fileName << fileDirectory.str() << "Object.txt";
     mkdir << 'm' << 'k' << 'd' << 'i' << 'r' << ' ' << '"' << fileDirectory.str() << '"';
@@ -666,7 +666,7 @@ MENU EntityEditor::defaultMenu =
                 OPTION( "Edit Object ID (Number)", CURRENTLY ), OPTION( "Set Initialize (true, false)", CURRENTLY ),
                 OPTION( "Set Refresh (true, false)", CURRENTLY ), OPTION( "Set Destroy (true, false)", CURRENTLY ),
                 OPTION( "Set Destroy On Create (true, false)", CURRENTLY ), OPTION( "Initialize Script (Directoy, File Name of A .lua File)", CURRENTLY ),
-                OPTION( "Refresh Script (Directoy, File Name of A .lua File)", CURRENTLY ), OPTION( "Destroy Script (Directoy, File Name of A .lua File)t", CURRENTLY )
+                OPTION( "Refresh Script (Directoy, File Name of A .lua File)", CURRENTLY ), OPTION( "Destroy Script (Directoy, File Name of A .lua File)", CURRENTLY )
 };
 vector< unique_ptr< EntityEditor > > EntityEditor::editors;
 
