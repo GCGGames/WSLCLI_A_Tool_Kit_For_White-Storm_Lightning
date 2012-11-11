@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1352589889 source:c:\users\christopher greeley\desktop\my stuff\projects\computerprogramming\c++\wslcli\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<sstream>
+	<cstdlib>
+	<vector>
+	<memory>
+	<algorithm>
+	<stdio.h>
+	<stdlib.h>
+	<sys/stat.h>
+	<io.h>
+	<stdio.h>
+	<stdlib.h>
+
